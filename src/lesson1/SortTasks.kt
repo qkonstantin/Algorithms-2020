@@ -2,6 +2,8 @@
 
 package lesson1
 
+import java.io.File
+
 /**
  * Сортировка времён
  *
@@ -96,8 +98,25 @@ fun sortAddresses(inputName: String, outputName: String) {
  * 99.5
  * 121.3
  */
+// Трудоёмкость O(n)
+// Ресурсоёмкость O(1)
 fun sortTemperatures(inputName: String, outputName: String) {
-    TODO()
+    val reader = File(inputName).readLines()
+    val list = Array(7731) { 0 }
+
+    for (line in reader) {
+        list[((line.toDouble() * 10.0 + 2730.0).toInt())]++
+    }
+
+    File(outputName).bufferedWriter().use {
+        for (i in list.indices) {
+            while (list[i] != 0) {
+                it.write(((i - 2730) / 10.0).toString())
+                it.newLine()
+                list[i]--
+            }
+        }
+    }
 }
 
 /**
@@ -147,7 +166,20 @@ fun sortSequence(inputName: String, outputName: String) {
  *
  * Результат: second = [1 3 4 9 9 13 15 20 23 28]
  */
+// Трудоёмкость O(n)
+// Ресурсоёмкость O(1)
 fun <T : Comparable<T>> mergeArrays(first: Array<T>, second: Array<T?>) {
-    TODO()
+    var firstIndex = 0
+    var secondIndex = first.size
+
+    for (i in second.indices) {
+        if (firstIndex < first.size && (secondIndex == second.size || first[firstIndex] <= second[secondIndex]!!)) {
+            second[i] = first[firstIndex]
+            firstIndex++
+        } else {
+            second[i] = second[secondIndex]
+            secondIndex++
+        }
+    }
 }
 

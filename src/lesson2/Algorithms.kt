@@ -2,6 +2,7 @@
 
 package lesson2
 
+
 /**
  * Получение наибольшей прибыли (она же -- поиск максимального подмассива)
  * Простая
@@ -79,8 +80,16 @@ fun optimizeBuyAndSell(inputName: String): Pair<Int, Int> {
  * Общий комментарий: решение из Википедии для этой задачи принимается,
  * но приветствуется попытка решить её самостоятельно.
  */
+// Трудоёмкость O(n)
+// Ресурсоёмкость O(1)
 fun josephTask(menNumber: Int, choiceInterval: Int): Int {
-    TODO()
+    var previous = 0
+
+    for (i in 1..menNumber) {
+        previous = (previous + choiceInterval - 1) % i + 1
+    }
+
+    return previous
 }
 
 /**
@@ -108,6 +117,22 @@ fun longestCommonSubstring(first: String, second: String): String {
  * Справка: простым считается число, которое делится нацело только на 1 и на себя.
  * Единица простым числом не считается.
  */
+// Трудоёмкость O(N*sqrt(N))
+// Ресурсоёмкость O(1)
 fun calcPrimesNumber(limit: Int): Int {
-    TODO()
+    var res = 1
+    if (limit > 1) {
+        for (i in 2..limit)
+            res += isPrime(i)
+    } else return 0
+    return res
+}
+
+fun isPrime(n: Int): Int {
+    val x = kotlin.math.sqrt(n.toDouble()).toInt()
+    if (n % 2 != 0) {
+        for (m in 3..x step 2)
+            if (n % m == 0) return 0
+    } else return 0
+    return 1
 }
